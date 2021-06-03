@@ -1,0 +1,26 @@
+
+package com.example.mediconline;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Handler;
+import android.view.WindowManager;
+
+public class MainActivity extends AppCompatActivity {
+    private final int tiemposplas=3000;//Se crea la variable que contiene el tiempo en milisegundos
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//Se define la orientación del activity
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); //Se define que el activity sera en pantalla completa, por lo que no se mostrará la barra de estado del celular
+        new Handler().postDelayed(new Runnable() {//Se crea una hilo que se ejecutara después del tiempo enviado por parametro
+            @Override
+            public void run() {
+                Intent intent=new Intent(MainActivity.this, InicioSesion.class);//Se inicializa el intent que lleve a la ventana InicioSesion
+                startActivity(intent);//Se ejecuta el intent que permite el paso a la otra ventana
+                finish();//Se finaliza el intent actual
+            };
+        }, tiemposplas)//tiempo enviado por parámetro al hilo;}
